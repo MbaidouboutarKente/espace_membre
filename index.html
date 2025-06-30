@@ -4,97 +4,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenue sur notre plateforme sociale</title>
+    <title>Bienvenue sur Connect+ | Votre réseau social nouvelle génération</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
             --primary: #1877f2;
+            --primary-light: #e7f3ff;
             --secondary: #42b72a;
-            --dark: #1c1e21;
-            --light: #f0f2f5;
+            --dark: #1d2228;
+            --light: #f5f6f8;
+            --gray: #65676b;
         }
 
         body {
-            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--light);
             color: var(--dark);
+            overflow-x: hidden;
         }
 
-        .hero-section {
-            background: linear-gradient(to right, #1877f2, #0d5bca);
-            color: white;
+        /* Navigation */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
         }
 
-        .feature-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: none;
-            border-radius: 10px;
-            overflow: hidden;
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+        .navbar-brand i {
+            margin-right: 10px;
         }
 
         .nav-link {
             font-weight: 500;
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1.25rem !important;
+            color: var(--dark) !important;
+            transition: all 0.3s;
+            border-radius: 8px;
         }
 
-        .btn-cta {
-            padding: 0.75rem 2rem;
+        .nav-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary) !important;
+        }
+
+        .btn-connect {
+            padding: 0.5rem 1.5rem;
             font-weight: 600;
-            border-radius: 6px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary), #1658c9);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+        }
+
+        .hero-title {
+            font-weight: 800;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-img {
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
+            transition: transform 0.5s;
+        }
+
+        .hero-img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Features */
+        .section-title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            height: 100%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats */
+        .stats-section {
+            background-color: var(--primary-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            font-family: Georgia, serif;
+            color: rgba(0, 0, 0, 0.05);
+            line-height: 1;
         }
 
         .testimonial-img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
             border-radius: 50%;
             border: 3px solid var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-role {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+        }
+
+        .cta-title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-cta {
+            padding: 0.75rem 2.5rem;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-cta-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-cta-outline {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+
+        .btn-cta-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-link:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        [data-aos] {
+            transition: all 0.8s ease;
+        }
+
+        .aos-fade {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .aos-fade.aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .aos-zoom {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+
+        .aos-zoom.aos-animate {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#" style="color: var(--primary);">
-                <i class="fas fa-users me-2"></i>SocialSphere
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="#">
+                <i class="fas fa-users"></i>Connect+
             </a>
-            <div class="d-flex">
-                <a href="php/login.php" class="btn btn-outline-primary me-2">Connexion</a>
-                <a href="php/register.php" class="btn btn-primary">Inscription</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.1s;">
+                        <a class="nav-link" href="#features">Fonctionnalités</a>
+                    </li>
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.2s;">
+                        <a class="nav-link" href="#community">Communauté</a>
+                    </li>
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.3s;">
+                        <a class="nav-link" href="#testimonials">Avis</a>
+                    </li>
+                    <li class="nav-item animate__animated animate__fadeInDown" style="animation-delay: 0.4s;">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex animate__animated animate__fadeInRight">
+                    <a href="php/login.php" class="btn btn-outline-primary btn-connect me-2">Connexion</a>
+                    <a href="php/login.php?form=register" class="btn btn-primary btn-connect">Inscription</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section py-5">
-        <div class="container py-5">
+    <section class="hero-section">
+        <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h1 class="display-4 fw-bold mb-4">Connectez-vous avec le monde</h1>
-                    <p class="lead mb-4">
-                        Rejoignez une communauté dynamique où vous pouvez partager, discuter et rester en contact avec
-                        ceux qui comptent.
+                    <h1 class="hero-title animate__animated animate__fadeInUp">Connectez-vous différemment</h1>
+                    <p class="hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        Rejoignez une communauté vibrante où vos relations prennent vie. Partagez, discutez et découvrez
+                        comme jamais auparavant.
                     </p>
-                    <a href="php/register.php" class="btn btn-light btn-cta me-2">Commencer</a>
-                    <a href="#features" class="btn btn-outline-light btn-cta">En savoir plus</a>
+                    <div class="d-flex gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        <a href="php/login.php?form=register" class="btn btn-light btn-lg px-4">Commencer maintenant</a>
+                        <a href="#features" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-play-circle me-2"></i>Voir la démo
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://illustrations.popsy.co/amber/connected-world.svg" alt="Monde connecté"
-                        class="img-fluid">
+                <div class="col-lg-6 animate__animated animate__fadeIn" style="animation-delay: 0.3s;">
+                    <img src="https://illustrations.popsy.co/amber/social-media.svg" alt="Réseau social"
+                        class="img-fluid hero-img">
                 </div>
             </div>
         </div>
@@ -104,55 +479,303 @@
     <section id="features" class="py-5 bg-white">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bold">Découvrez notre plateforme</h2>
-                <p class="text-muted">Une expérience sociale complète à portée de main</p>
+                <span class="badge bg-primary-light text-primary mb-3">FONCTIONNALITÉS</span>
+                <h2 class="section-title animate__animated animate__fadeIn">Une expérience sociale complète</h2>
+                <p class="text-muted mx-auto animate__animated animate__fadeIn"
+                    style="max-width: 700px; animation-delay: 0.2s;">
+                    Découvrez une plateforme conçue pour nourrir vos relations et faciliter vos échanges
+                </p>
             </div>
 
             <div class="row g-4">
                 <!-- Publication -->
-                <div class="col-md-4">
-                    <div class="feature-card card h-100">
-                        <div class="card-body text-center p-4">
-                            <div class="feature-icon">
-                                <i class="fas fa-newspaper"></i>
-                            </div>
-                            <h4>Publications</h4>
-                            <p>
-                                Partagez vos pensées, photos et vidéos avec votre réseau.
-                                Interagissez avec les publications de vos contacts.
-                            </p>
+                <div class="col-md-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-newspaper"></i>
                         </div>
+                        <h4 class="feature-title">Publications enrichies</h4>
+                        <p class="text-muted">
+                            Partagez vos moments en texte, photo ou vidéo avec des options de formatage avancées.
+                            Créez des albums, ajoutez des localisations et identifiez vos amis.
+                        </p>
+                        <ul class="list-unstyled text-primary">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Éditeur de texte enrichi</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Galeries photos organisées</li>
+                            <li><i class="fas fa-check-circle me-2"></i> Vidéos HD avec prévisualisation</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Amis -->
-                <div class="col-md-4">
-                    <div class="feature-card card h-100">
-                        <div class="card-body text-center p-4">
-                            <div class="feature-icon">
-                                <i class="fas fa-user-friends"></i>
-                            </div>
-                            <h4>Réseau social</h4>
-                            <p>
-                                Trouvez et connectez-vous avec des amis, des collègues
-                                et des personnes partageant vos centres d'intérêt.
-                            </p>
+                <div class="col-md-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-friends"></i>
                         </div>
+                        <h4 class="feature-title">Gestion des relations</h4>
+                        <p class="text-muted">
+                            Organisez vos contacts en cercles personnalisés. Retrouvez des anciennes connaissances
+                            grâce à notre système de suggestions intelligentes.
+                        </p>
+                        <ul class="list-unstyled text-primary">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Cercles personnalisés</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Suggestions intelligentes</li>
+                            <li><i class="fas fa-check-circle me-2"></i> Anniversaires et événements</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Messagerie -->
-                <div class="col-md-4">
-                    <div class="feature-card card h-100">
-                        <div class="card-body text-center p-4">
-                            <div class="feature-icon">
-                                <i class="fas fa-comments"></i>
+                <div class="col-md-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h4 class="feature-title">Messagerie avancée</h4>
+                        <p class="text-muted">
+                            Discutez en temps réel avec messagerie instantanée, appels vocaux et visio.
+                            Créez des groupes thématiques avec jusqu'à 250 participants.
+                        </p>
+                        <ul class="list-unstyled text-primary">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Chat en temps réel</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Appels vidéo HD</li>
+                            <li><i class="fas fa-check-circle me-2"></i> Groupes thématiques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Événements -->
+                <div class="col-md-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4 class="feature-title">Événements</h4>
+                        <p class="text-muted">
+                            Créez et gérez des événements publics ou privés. Suivez les participations,
+                            partagez des documents et discutez avant, pendant et après l'événement.
+                        </p>
+                        <ul class="list-unstyled text-primary">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Calendrier intégré</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Rappels automatiques</li>
+                            <li><i class="fas fa-check-circle me-2"></i> Sondages de disponibilité</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Groupes -->
+                <div class="col-md-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="feature-title">Groupes communautaires</h4>
+                        <p class="text-muted">
+                            Rejoignez des groupes par centres d'intérêt avec systèmes de modération avancés,
+                            sous-groupes thématiques et espaces de partage dédiés.
+                        </p>
+                        <ul class="list-unstyled text-primary">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Modération avancée</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Sous-groupes thématiques</li>
+                            <li><i class="fas fa-check-circle me-2"></i> Fichiers partagés</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Marketplace -->
+                <div class="col-md-6 col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h4 class="feature-title">Marketplace</h4>
+                        <p class="text-muted">
+                            Notre espace de vente entre membres avec système de notation, messagerie dédiée
+                            et options de paiement sécurisées intégrées.
+                        </p>
+                        <ul class="list-unstyled text-primary">
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Vente entre particuliers</li>
+                            <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Système de notation</li>
+                            <li><i class="fas fa-check-circle me-2"></i> Paiements sécurisés</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section py-5">
+        <div class="container py-4">
+            <div class="row text-center">
+                <div class="col-md-3 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="250000">0</div>
+                        <div class="stat-label">Membres actifs</div>
+                    </div>
+                </div>
+                <div class="col-md-3 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="15000">0</div>
+                        <div class="stat-label">Groupes actifs</div>
+                    </div>
+                </div>
+                <div class="col-md-3 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500000">0</div>
+                        <div class="stat-label">Publications/jour</div>
+                    </div>
+                </div>
+                <div class="col-md-3 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">% de satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 aos-init aos-animate" data-aos="fade-right">
+                    <img src="https://illustrations.popsy.co/amber/team-work.svg" alt="Communauté"
+                        class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-left">
+                    <span class="badge bg-primary-light text-primary mb-3">COMMUNAUTÉ</span>
+                    <h2 class="section-title mb-4">Rejoignez une communauté bienveillante</h2>
+                    <p class="mb-4">
+                        Notre plateforme rassemble des personnes partageant les mêmes valeurs d'entraide et de respect.
+                        Que vous cherchiez à reconnecter avec d'anciens amis, échanger sur vos passions ou développer
+                        votre réseau professionnel, vous trouverez votre place parmi nous.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Groupes thématiques</h5>
+                                    <p class="text-muted small">Plus de 200 catégories disponibles</p>
+                                </div>
                             </div>
-                            <h4>Messagerie instantanée</h4>
-                            <p>
-                                Discutez en temps réel avec vos contacts grâce à notre
-                                système de messagerie privée et de groupes.
-                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Événements locaux</h5>
+                                    <p class="text-muted small">Rencontres près de chez vous</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Système de mentorat</h5>
+                                    <p class="text-muted small">Apprenez des autres membres</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Espaces sécurisés</h5>
+                                    <p class="text-muted small">Modération active 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="php/register.php" class="btn btn-primary mt-3">Découvrir la communauté</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <span class="badge bg-primary-light text-primary mb-3">TÉMOIGNAGES</span>
+                <h2 class="section-title animate__animated animate__fadeIn">Ils nous font confiance</h2>
+                <p class="text-muted mx-auto animate__animated animate__fadeIn"
+                    style="max-width: 700px; animation-delay: 0.2s;">
+                    Découvrez ce que nos membres disent de leur expérience
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
+                    <div class="testimonial-card h-100">
+                        <div class="stars mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-4">
+                            "J'ai retrouvé des amis que je n'avais pas vus depuis l'université grâce à Connect+.
+                            La messagerie est tellement fluide que c'est devenu notre principal moyen de communication."
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="testimonial-name mb-0">Marie Dubois</h5>
+                                <p class="testimonial-role">Membre depuis 2019</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card h-100">
+                        <div class="stars mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="mb-4">
+                            "En tant que propriétaire de petite entreprise, j'ai pu développer mon réseau professionnel
+                            de manière significative. Les groupes thématiques sont une mine d'or d'informations."
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="testimonial-name mb-0">Thomas Martin</h5>
+                                <p class="testimonial-role">Entrepreneur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card h-100">
+                        <div class="stars mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-4">
+                            "La qualité des interactions est bien supérieure à ce que j'ai connu ailleurs.
+                            Les fonctionnalités de modération permettent de garder les discussions agréables et
+                            constructives."
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="testimonial-name mb-0">Sophie Lambert</h5>
+                                <p class="testimonial-role">Enseignante</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,53 +783,106 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="py-5 bg-light">
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5 bg-light">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bold">Ce qu'en disent nos membres</h2>
-                <p class="text-muted">Découvrez comment notre plateforme change leur quotidien</p>
+                <span class="badge bg-primary-light text-primary mb-3">FAQ</span>
+                <h2 class="section-title animate__animated animate__fadeIn">Questions fréquentes</h2>
+                <p class="text-muted mx-auto animate__animated animate__fadeIn"
+                    style="max-width: 700px; animation-delay: 0.2s;">
+                    Trouvez rapidement les réponses à vos questions
+                </p>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center p-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="testimonial-img mb-3">
-                            <h5>Marie L.</h5>
-                            <p class="text-muted">Membre depuis 2 ans</p>
-                            <p>
-                                "J'adore pouvoir rester en contact avec ma famille éloignée
-                                et partager nos moments précieux."
-                            </p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item mb-3 border-0 shadow-sm aos-init aos-animate" data-aos="fade-up"
+                            data-aos-delay="0">
+                            <h3 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne">
+                                    Comment créer un compte ?
+                                </button>
+                            </h3>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>La création de compte est simple et gratuite :</p>
+                                    <ol>
+                                        <li>Cliquez sur le bouton "Inscription" en haut à droite</li>
+                                        <li>Remplissez le formulaire avec vos informations</li>
+                                        <li>Confirmez votre adresse email via le lien que vous recevrez</li>
+                                        <li>Complétez votre profil pour commencer à utiliser la plateforme</li>
+                                    </ol>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center p-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testimonial-img mb-3">
-                            <h5>Pierre D.</h5>
-                            <p class="text-muted">Membre depuis 1 an</p>
-                            <p>
-                                "La messagerie instantanée est parfaite pour coordonner
-                                nos projets professionnels avec mon équipe."
-                            </p>
+                        <div class="accordion-item mb-3 border-0 shadow-sm aos-init aos-animate" data-aos="fade-up"
+                            data-aos-delay="100">
+                            <h3 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo">
+                                    Est-ce que le service est vraiment gratuit ?
+                                </button>
+                            </h3>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Oui, l'accès de base à Connect+ est entièrement gratuit et le restera. Nous
+                                        offrons toutes les fonctionnalités essentielles sans frais.</p>
+                                    <p>Une version premium avec des fonctionnalités avancées (espace de stockage
+                                        augmenté, statistiques détaillées, etc.) est disponible en option.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center p-4">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testimonial-img mb-3">
-                            <h5>Sophie T.</h5>
-                            <p class="text-muted">Nouveau membre</p>
-                            <p>
-                                "J'ai retrouvé des amis d'enfance que je n'avais pas vus
-                                depuis des années. Quelle belle surprise !"
-                            </p>
+                        <div class="accordion-item mb-3 border-0 shadow-sm aos-init aos-animate" data-aos="fade-up"
+                            data-aos-delay="200">
+                            <h3 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree">
+                                    Comment protégeons-nous vos données ?
+                                </button>
+                            </h3>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>La protection de vos données est notre priorité absolue :</p>
+                                    <ul>
+                                        <li>Chiffrement de bout en bout pour les messages privés</li>
+                                        <li>Serveurs sécurisés en Europe</li>
+                                        <li>Contrôle granularisé sur la visibilité de chaque information</li>
+                                        <li>Authentification à deux facteurs disponible</li>
+                                        <li>Conformité RGPD stricte</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item mb-3 border-0 shadow-sm aos-init aos-animate" data-aos="fade-up"
+                            data-aos-delay="300">
+                            <h3 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour">
+                                    Puis-je importer mes contacts depuis d'autres réseaux ?
+                                </button>
+                            </h3>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Nous proposons des outils d'importation sécurisés depuis les principales
+                                        plateformes sociales. Ces outils :</p>
+                                    <ul>
+                                        <li>Ne stockent jamais vos identifiants externes</li>
+                                        <li>Vous permettent de sélectionner précisément les contacts à importer</li>
+                                        <li>Envoient des invitations personnalisables à vos contacts</li>
+                                    </ul>
+                                    <p>L'importation est totalement optionnelle et contrôlée par vous.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -215,48 +891,153 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-5 bg-primary text-white">
-        <div class="container py-4 text-center">
-            <h2 class="fw-bold mb-4">Prêt à nous rejoindre ?</h2>
-            <p class="lead mb-4">Inscrivez-vous maintenant et commencez à connecter avec votre monde.</p>
-            <a href="php/register.php" class="btn btn-light btn-lg px-4 me-2">S'inscrire gratuitement</a>
-            <a href="php/login.php" class="btn btn-outline-light btn-lg px-4">Se connecter</a>
+    <section class="cta-section py-5">
+        <div class="container py-4 text-center position-relative">
+            <h2 class="cta-title mb-4 animate__animated animate__fadeIn">Prêt à rejoindre l'aventure ?</h2>
+            <p class="lead text-white mb-5 animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+                Des milliers de personnes attendent de vous rencontrer. Inscrivez-vous en moins de 2 minutes.
+            </p>
+            <div class="d-flex justify-content-center gap-3 animate__animated animate__fadeIn"
+                style="animation-delay: 0.4s;">
+                <a href="php/login.php?form=register" class="btn btn-cta btn-cta-primary">Commencer maintenant</a>
+                <a href="php/login.php" class="btn btn-cta btn-cta-outline">Déjà membre ?</a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
+    <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h5><i class="fas fa-users me-2"></i>SocialSphere</h5>
-                    <p class="text-muted">Connectez-vous avec ceux qui comptent vraiment.</p>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="#" class="footer-logo"><i class="fas fa-users me-2"></i>Connect+</a>
+                    <p class="text-muted">
+                        La plateforme sociale qui place les relations humaines au cœur de l'expérience numérique.
+                    </p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <h5>Liens utiles</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-muted">Aide</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted">Confidentialité</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted">Conditions</a></li>
-                    </ul>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Plateforme</h5>
+                        <a href="#" class="footer-link">Fonctionnalités</a>
+                        <a href="#" class="footer-link">Tarifs</a>
+                        <a href="#" class="footer-link">Applications</a>
+                        <a href="#" class="footer-link">Nouveautés</a>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <h5>Nous suivre</h5>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Entreprise</h5>
+                        <a href="#" class="footer-link">À propos</a>
+                        <a href="#" class="footer-link">Carrières</a>
+                        <a href="#" class="footer-link">Presse</a>
+                        <a href="#" class="footer-link">Blog</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Ressources</h5>
+                        <a href="#" class="footer-link">Aide</a>
+                        <a href="#" class="footer-link">Sécurité</a>
+                        <a href="#" class="footer-link">Accessibilité</a>
+                        <a href="#" class="footer-link">Centre d'assistance</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-links">
+                        <h5>Légal</h5>
+                        <a href="#" class="footer-link">Confidentialité</a>
+                        <a href="#" class="footer-link">Conditions</a>
+                        <a href="#" class="footer-link">Cookies</a>
+                        <a href="#" class="footer-link">RGPD</a>
                     </div>
                 </div>
             </div>
-            <hr class="my-4 bg-secondary">
-            <div class="text-center text-muted">
-                <small>© 2023 SocialSphere. Tous droits réservés.</small>
+            <div class="copyright text-center">
+                <p class="mb-0">© 2023 Connect+. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // Animations au défilement
+        function initAOS() {
+            const elements = document.querySelectorAll('[data-aos]');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => {
+                el.classList.add('aos-fade');
+                observer.observe(el);
+            });
+        }
+
+        // Compteurs animés
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Démarrer les animations lorsque la page est chargée
+        document.addEventListener('DOMContentLoaded', function () {
+            initAOS();
+
+            // Démarrer les compteurs quand la section stats est visible
+            const statsSection = document.querySelector('.stats-section');
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(statsSection);
+                }
+            });
+
+            observer.observe(statsSection);
+        });
+
+        // Navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
